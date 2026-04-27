@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>The Scroll of Truth</title>
+  <meta name="description" content="An endless scroll of uncomfortable truths.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══════════ API GATEWAY ═══════════ -->
+  <div id="screen-api" class="screen active">
+    <div class="api-card">
+      <div class="api-icon">📜</div>
+      <h2>The Keepers of the Scroll</h2>
+      <p>The scroll generates profound truths dynamically using Anthropic's Claude API. To unfurl it, provide your access key.</p>
+      <div class="api-input-wrap">
+        <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-...">
+      </div>
+      <p class="api-note">Your key remains entirely on your device and is never stored centrally.</p>
+      <button class="btn btn-primary" onclick="initApp()">Unfurl the Scroll</button>
+      <button class="btn btn-text" onclick="skipToOffline()">Skip to offline cache</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ MAIN SCROLL INTERFACE ═══════════ -->
+  <div id="screen-scroll" class="screen">
+    
+    <div class="vertical-text left-edge">VERITAS | SATYAM | TRUTH | VERITAS | SATYAM | TRUTH | VERITAS | SATYAM | TRUTH</div>
+    <div class="vertical-text right-edge">VERITAS | SATYAM | TRUTH | VERITAS | SATYAM | TRUTH | VERITAS | SATYAM | TRUTH</div>
+
+    <div class="parchment-wrapper">
+      
+      <!-- STICKY HEADER -->
+      <header class="scroll-header">
+        <div class="header-titles">
+          <h1>THE SCROLL OF TRUTH</h1>
+          <p class="subtitle">Uncomfortable. Undeniable. Unfiltered.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-outline" onclick="openModal()">Contribute</button>
+          <button class="btn btn-icon" id="audioToggle" onclick="toggleAudio()" title="Toggle Ambience">🕯️</button>
+        </div>
+      </header>
+
+      <!-- FEED CONTAINER -->
+      <div id="truthFeed" class="feed">
+        <!-- Truths rendered by JS -->
+      </div>
+
+      <!-- LOADER (Infinite Scroll Trigger) -->
+      <div id="scrollTrigger" class="loader-wrap">
+        <div class="loader-dots">
+          <span>.</span><span>.</span><span>.</span>
+        </div>
+        <div class="loader-text">The scroll is thinking...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ CONTRIBUTION MODAL ═══════════ -->
+  <div id="submitModal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Inscribe a Truth</h2>
+      <p>Speak clearly. Your words will be judged by the keepers (Claude AI) before entering the scroll.</p>
+      
+      <select id="truthCategory" class="brutalist-input">
+        <option value="Philosophy">Philosophy</option>
+        <option value="Life">Life</option>
+        <option value="Tech">Tech</option>
+        <option value="Society">Society</option>
+        <option value="Science">Science</option>
+      </select>
+
+      <textarea id="truthInput" class="brutalist-input text-large" placeholder="The truth is..."></textarea>
+      
+      <div class="modal-actions">
+        <button class="btn btn-text" onclick="closeModal()">Cancel</button>
+        <button id="btnSubmitTruth" class="btn btn-primary" onclick="submitTruth()">Submit to the Oracle</button>
+      </div>
+
+      <div id="modalLoading" class="modal-loading" style="display: none;">
+        The oracle is judging your words...
+      </div>
+      <div id="modalResult" class="modal-result" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
